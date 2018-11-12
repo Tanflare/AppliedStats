@@ -1,0 +1,29 @@
+---
+title: "Title of your project here"
+subtitle: "Section: 1:20"
+author: "Pete Schultz, Sandy Rosas & Tanush Samson"
+date: "11/16/18"
+output: 
+  html_document: 
+    fig_caption: yes
+---
+
+
+```{r,include=FALSE}
+# These commands should always be near the top to ensure the libraries are loaded before the analysis.
+library(mosaic)
+```
+
+
+### Background
+
+TEST
+
+
+### Methods
+
+
+### Results
+
+
+### Discussion
