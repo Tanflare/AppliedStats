@@ -16,7 +16,7 @@ library(mosaic)
 
 
 ### Background
-The videogame industry is a multi-billion dollar industry and a significant part of the world economy. We investigated certain trends and patterns within this industry to better understand it. The specific relationships we were interested in are American and Japanese sales, and console and genre. On top of this, we want to estimate the average number of global sales a video game has. From this we are able to better understand how large of an impact video games has on the global economy, learn which economy has a larger market for video games between the Americas and Japan, and to see if specific consoles favor specific genres of games more so than others.
+The videogame industry is a multi-billion dollar industry and a significant part of the world economy. We investigated certain trends and patterns within this industry to better understand it. The specific relationships we were interested in are American and Japanese sales, and console and genre. On top of this, we want to estimate the average number of global sales a video game has. From this we are able to better understand how large of an impact video games has on the global economy, learn which economy has a larger market for video games between the Americas and Japan, and to see if specific consoles favor specific genres of games more so than others .
 
 
 ### Methods
