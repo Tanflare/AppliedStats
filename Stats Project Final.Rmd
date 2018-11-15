@@ -16,11 +16,11 @@ library(mosaic)
 
 
 ### Background
-The videogame industry is a multi-billion dollar industry and a significant part of the world economy. We investigated certain trends and patterns within this industry to better understand it. The specific relationships we were interested in are American and Japanese sales, and console and genre. On top of this, we want estimate the average number of global sales a video game has. From this we were able to better understand how large of an impact video games has on the global economy, learn which economy has a larger market for video games between the Americas and Japan, and to see if specific consoles are more prone to specific genres of games.
+The videogame industry is a multi-billion dollar industry and a significant part of the world economy. We investigated certain trends and patterns within this industry to better understand it. The specific relationships we were interested in are American and Japanese sales, and console and genre. On top of this, we want to estimate the average number of global sales a video game has. From this we are able to better understand how large of an impact video games has on the global economy, learn which economy has a larger market for video games between the Americas and Japan, and to see if specific consoles are favor specific genres of games.
 
 
 ### Methods
-We obtained our data from an online dataset called "Video Game Sales with Ratings" by Rush Kirubi from www.kaggle.com. With this dataset, we use a chi-square significance test to check if any genre is more prevalent on a variety of different gaming systems. Further, we run a two-sample t-test to see if Japanese video game sales differ from American video game sales. Lastly, we use a 90% confidence interval to find the average global sale of a video game.
+We obtained our data from an online dataset called "Video Game Sales with Ratings" by Rush Kirubi from www.kaggle.com. With this dataset, we use a chi-square significance test to check if any genre is more prevalent on a variety of different gaming systems (including Playstation 4, Xbox ONE, WiiU). Further, we run a two-sample t-test to see if Japanese video game sales differ from American video game sales. Lastly, we use a 90% confidence interval to find the average global sale of a video game.
 
 ### Results
 
