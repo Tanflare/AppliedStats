@@ -27,13 +27,13 @@ The videogame industry is a multi-billion dollar industry and a significant part
 ### Methods
 We obtained our data from an online dataset called "Video Game Sales with Ratings" by Rush Kirubi from www.kaggle.com.  
 
-**RELATIONSHIP 1**
+**RELATIONSHIP 1**  
 With this dataset, we create a randomization distribution of the correlation between global sales (in millions of units) and critic scores. From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation. We assumed that the correlation would be positive, so our alternative hypothesis was $\rho > 0$.
 
-**RELATIONSHIP 2**
+**RELATIONSHIP 2**  
 Further, we use a 90% confidence interval to find the average global sale (in millions of units) of a video game on a variety of consoles (PS4, Xbox One and WiiU).  
 
-**RELATIONSHIP 3**
+**RELATIONSHIP 3**  
 Lastly,  we create a randomization distribution of the correlation between North American Sales (in millions of units) and European Sales (in millions of units). From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation. We assumed that the correlation would be positive due to similar cultural characterisitcs between the two regions, so our alternative hypothesis was $\rho > 0$.      
 
 
