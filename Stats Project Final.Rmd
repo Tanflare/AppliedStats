@@ -12,6 +12,7 @@ output:
 ```{r,include=FALSE}
 # These commands should always be near the top to ensure the libraries are loaded before the analysis.
 library(mosaic)
+Games2 = read.csv(file = "VGS.csv")
 ```
 
 
