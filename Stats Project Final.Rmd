@@ -1,8 +1,8 @@
 ---
-title: "Title of your project here"
-subtitle: "Section: 1:20"
-author: "Pete Schultz, Sandy Rosas & Tanush Samson"
-date: "11/16/18"
+title: "Math 260 Project Data Description"
+subtitle: "Section: 1:20PM"
+author: "Sandy Rosas, Pete Schultz & Tanush Samson"
+date: "11/5/18"
 output: 
   html_document: 
     fig_caption: yes
@@ -12,17 +12,44 @@ output:
 ```{r,include=FALSE}
 # These commands should always be near the top to ensure the libraries are loaded before the analysis.
 library(mosaic)
+library(Lock5withR)
+library(readr)
+library(dplyr)
+Games2 = read.csv(file = "VGS.csv")
 ```
-
 
 ### Background
 The videogame industry is a multi-billion dollar industry and a significant part of the world economy. We investigated certain trends and patterns within this industry to better understand it. The specific relationships we were interested in are American and Japanese sales, and console and genre. On top of this, we want to estimate the average number of global sales a video game has. From this we are able to better understand how large of an impact video games has on the global economy, learn which economy has a larger market for video games between the Americas and Japan, and to see if specific consoles favor specific genres of games more so than others .
 
 
 ### Methods
-We obtained our data from an online dataset called "Video Game Sales with Ratings" by Rush Kirubi from www.kaggle.com. With this dataset, we use a chi-square significance test to check if any genre is more prevalent on a variety of different gaming systems (including Playstation 4, Xbox ONE, WiiU). Further, we run a two-sample t-test to see if Japanese video game sales differ from American video game sales. Lastly, we use a 90% confidence interval to find the average global sale of a video game.
+We obtained our data from an online dataset called "Video Game Sales with Ratings" by Rush Kirubi from www.kaggle.com.  
+
+With this dataset, we bootstrap the correlation between global sales (in millions of units) and critic scores. From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation.  
+
+Further, we run a two-sample t-test to see if the average Japanese sale of a video game  (in millions of units) differs from the average North American sale of a video game (in millions units).  
+
+Lastly, we use a 90% confidence interval to find the average global sale (in millions of units) of video games on a variety of consoles (PS4, xbox One and WiiU).  
 
 ### Results
+**RELATIONSHIP 1**  
+$H_0: \rho = 0$  
+$H_a: \rho > 0$  
+where $\rho$ is the true population coefficient between Global Sales (in millions of units) and Critic Score for all video games.
+
+We obtain sample correlation of r = 0.245 with a p-value of essentially 0. This means that assuming the null hypothesis is true (that there is no correlation between global sales and critic score), there is essentially a 0% chance that we would obtain a sample correlation statistic as extreme as 0.245. Therefore, at the $\alpha$ = 0.01 level of significance, we reject the null hypothesis and conclude that there is sufficient evidence that supports the claim that there is a positive correlation between Global Sales and Critic Scores for all video games.  
+```{r}
+Games2.cor = filter(Games2,Critic_Score != "NA")
+cor(Global_Sales~Critic_Score, data = Games2.cor)
+set.seed(50000)
+RandomizationCorrelation = do(1000)* cor(Global_Sales~shuffle(Critic_Score), data = Games2.cor)
+gf_histogram(~cor, data = RandomizationCorrelation)
+```
+```{r}
+prop(~cor >= 0.24547, data = RandomizationCorrelation)
+```
+**RELATIONSHIP 2**
+
 
 ```{r}
 #loading the dataset into R
