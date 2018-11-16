@@ -48,6 +48,7 @@ We obtain sample correlation of r = 0.245 with a p-value of essentially 0. This 
 ```{r}
 Games2.cor = filter(Games2,Critic_Score != "NA")
 cor(Global_Sales~Critic_Score, data = Games2.cor)
+gf_point(Global_Sales ~Critic_Score, data = Games2.cor) %>% gf_lm()
 set.seed(50000)
 RandomizationCorrelation = do(1000)* cor(Global_Sales~shuffle(Critic_Score), data = Games2.cor)
 gf_histogram(~cor, data = RandomizationCorrelation)
