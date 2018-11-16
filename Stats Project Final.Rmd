@@ -27,11 +27,11 @@ The videogame industry is a multi-billion dollar industry and a significant part
 ### Methods
 We obtained our data from an online dataset called "Video Game Sales with Ratings" by Rush Kirubi from www.kaggle.com.  
 
-With this dataset, we create a randomization distribution of the correlation between global sales (in millions of units) and critic scores. From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation.  
+With this dataset, we create a randomization distribution of the correlation between global sales (in millions of units) and critic scores. From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation. We assumed that the correlation would be positive, so our alternative hypothesis was $\rho > 0$.
 
 Further, we use a 90% confidence interval to find the average global sale (in millions of units) of a video game on a variety of consoles (PS4, Xbox One and WiiU).  
 
-Lastly, we run a chi-square test to see if the proportion of video game sales in Japan, the European Union and North America match the proportion of civilian population in each region (proportion relative to the total population of all three regions combined).    
+Lastly,  we create a randomization distribution of the correlation between North American Sales (in millions of units) and European Sales (in millions of units). From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation. We assumed that the correlation would be positive due to similar cultural characterisitcs between the two regions, so our alternative hypothesis was $\rho > 0$.      
 
 
 
@@ -59,7 +59,7 @@ prop(~cor >= 0.24547, data = RandomizationCorrelation)
 
 **RELATIONSHIP 2**
  
-An in-depth look into the distribution of global sales for the 3 main platforms: PS4, xbox One and WiiU.
+An in-depth look into the distribution of global sales for the 3 main platforms: PS4, Xbox One and WiiU.
 
 ```{r}
 #Sales for PS4
@@ -98,31 +98,19 @@ We are 90% confident that the true mean global sale of a video game on WiiU is b
 
 
 **RELATIONSHIP 3**
+$H_0: \rho = 0$  
+$H_a: \rho > 0$  
+where $\rho$ is the true population correlation between North American Sales (in millions of units) and European Union Sales (in millions of units) for all video games.  
 
-We expect the proportion of average video games sales in North America, European Union countries and Japan to match the proportion of the respective sales in those regions.
-
-$H_0: p_{NA} = 0.477, p_{EU} = 0.420, p_{JP} = 0.104$  
-$H_a:$ Some $p_i$ are not as specified.  
-where $p_{NA}$ is the proportion of video game sales in North America, $p_{EU}$ is the proportion of video game sales in the European Union, $p_{JP}$ is the proportion of video game sales in Japan. 0.477 refers to the proportion of residents in North America (relative to the total population in these three regions), 0.420 refers to the proportion of residents in the European Union, and 0.104 refers to the proportion of residents in Japan.  
-
-|       | Population (Millions) | Population Proportion | Sales (Millions) | Sales Proportion |
-|:-----:|:---------------------:|:---------------------:|:----------------:|:----------------:|
-|   NA  |         582.4         |         0.4767        |       0.263      |      0.5422      |
-|   EU  |         512.6         |         0.4195        |       0.145      |      0.2994      |
-|   JP  |         126.8         |         0.1038        |       0.078      |      0.1620      |
-| Total |         1221.8        |           1           |       0.486      |         1        |
-
-
+We obtain sample correlation of r = 0.7653 with a p-value of essentially 0. This means that assuming the null hypothesis is true (that there is no correlation between North American Sales and European Union Sales), there is essentially a 0% chance that we would obtain a sample correlation statistic as extreme as 0.7653. Therefore, at the $\alpha$ = 0.01 level of significance, we reject the null hypothesis and conclude that there is sufficient evidence that supports the claim that there is a positive correlation between North American Sales and European Union Sales for all video games.  
 ```{r}
-#Population for NA, EU and JP
-pop = c(0.4767,0.4195,0.1038)
-#Average sales for NA, EU and JP
-Sales = c(263000,145000,78000)
-#chi-squared test for significance 
-xchisq.test(Sales, p = pop)
+cor(NA_Sales~EU_Sales, data = Games2)
+gf_point(NA_Sales~EU_Sales, data = Games2) %>% gf_lm()
+set.seed(50000)
+RandomizationCorrelation2 = do(1000)* cor(NA_Sales~shuffle(EU_Sales), data = Games2)
+gf_histogram(~cor, data = RandomizationCorrelation2)
+prop(~cor >= 0.7653, data = RandomizationCorrelation)
 ```
-
-We obtain a test statistic $\chi^2$ of 36287 with the largest contribution to $\chi^2$ coming from EU, and a p-value $2.2 \times 10^{-16}$. Therefore, we reject the null hypothesis and conclude that there is sufficient evidence that supports the claim that the proportion of video game sales by region is not representative of the civilian population in that region (for Japan, North America, and Japan).
 
 
 ### Discussion
@@ -132,6 +120,6 @@ As previously mentioned, from the randomization distribution of 1000 simulations
 
 The 90% confidence intervals indicated that we are 90% confident that the true mean global sale of a video game on PS4 is between 0.020 and 3.908 million USD, the true mean global sale of a video game on Xbox One is between 0.010 and 2.872 million USD., and the true mean global sale of a video game on WiiU is between 0.020 and 2.105 million USD.  
 
-When we ran a chi squared test to determine whether the average video game sales matched the proportion of the civilian population for the three specific regions chosen, we found a test statistic of $\chi^2$ = 36287. The proportions expected, as our null hypothesis sates, are $H_0: p_{NA} = 0.477, p_{EU} = 0.420, p_{JP} = 0.104$. However, there were discrepancies between the expected and the observed, with the largest contribution to $\chi^2$ coming from EU. We obtained a p-value of $2.2 \times 10^{-16}$,  leading us to reject the null hypothesis and conclude that there is sufficient evidence that supports the claim that the proportion of video game sales by region is not representative of the civilian population for the three regions specified. 
+As previously mentioned, from the randomization distribution of 1000 simulations, we obtained a sample correlation of r = 0.7653 with a p-value of essentially 0. This means that assuming the null hypothesis is true (that there is no correlation between global sales and critic score), there is essentially a 0% chance that we would obtain a sample correlation statistic as extreme as 0.7653. Therefore, at the $\alpha$ = 0.01 level of significance, we reject the null hypothesis and conclude that there is sufficient evidence that supports the claim that there exists a positive correlation between North American Sales and European Union Sales for all video games. 
 
 As we finalized our project, some faults that our group was able to identify is that the data may not be representative of all games, as we had no way of knowing whether the data was randomized or not. For instance, we are aware that every game and console target a different age group/demographic, and since we do not know how the data were collected, some demographics may be better represented.  Furthermore, we were unable to indentify what time period this dataset represents. As time progresses, the video game market increases and access to gaming becomes more availble so current games are much more likely to outsell older-generation games. The dataset we worked with was overwhelmingly large (16,717 cases). If we had the opportunity to continue working on this project we would focus on obtaining smaller samples within this dataset, particularly one that would reflect the current game industry. 
