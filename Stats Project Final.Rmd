@@ -15,8 +15,8 @@ library(mosaic)
 library(Lock5withR)
 library(readr)
 library(dplyr)
-#Games2 = read.csv(file = "VGS.csv")
-Games2 = read.csv(file="C:\\Users\\tanus\\Documents\\VGS.csv")
+Games2 = read.csv(file = "VGS.csv")
+#Games2 = read.csv(file="C:\\Users\\tanus\\Documents\\VGS.csv")
 head(Games2)
 ```
 
@@ -29,9 +29,11 @@ We obtained our data from an online dataset called "Video Game Sales with Rating
 
 With this dataset, we create a randomization distribution of the correlation between global sales (in millions of units) and critic scores. From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation.  
 
-Further, we run a chi-square test to see if the proportion of video game sales in Japan, the European Union and North America match the proportion of civilian population in each region (proportion relative to the total population of all three regions combined).    
+Further, we use a 90% confidence interval to find the average global sale (in millions of units) of a video game on a variety of consoles (PS4, Xbox One and WiiU).  
 
-Lastly, we use a 90% confidence interval to find the average global sale (in millions of units) of a video game on a variety of consoles (PS4, Xbox One and WiiU).  
+Lastly, we run a chi-square test to see if the proportion of video game sales in Japan, the European Union and North America match the proportion of civilian population in each region (proportion relative to the total population of all three regions combined).    
+
+
 
 ### Results
 
@@ -53,6 +55,7 @@ gf_histogram(~cor, data = RandomizationCorrelation)
 ```{r}
 prop(~cor >= 0.24547, data = RandomizationCorrelation)
 ```
+
 
 **RELATIONSHIP 2**
  
@@ -96,10 +99,11 @@ We are 90% confident that the true mean global sale of a video game on WiiU is b
 
 **RELATIONSHIP 3**
 
-We expect the proportion of average video games sales in North America, Europeean Union countries and Japan to match the proportion of the respective sales in those regions.
+We expect the proportion of average video games sales in North America, European Union countries and Japan to match the proportion of the respective sales in those regions.
 
-$H_0: p_{NA} = 0.477, p_{EU} = 0.420, p_{JP} = 0.104$ 
-$H_a:$ Some $p_i$ are not as specified.
+$H_0: p_{NA} = 0.477, p_{EU} = 0.420, p_{JP} = 0.104$  
+$H_a:$ Some $p_i$ are not as specified.  
+where $p_{NA}$ is the proportion of video game sales in North America, $p_{EU}$ is the proportion of video game sales in the European Union, $p_{JP}$ is the proportion of video game sales in Japan. 0.477 refers to the proportion of residents in North America (relative to the total population in these three regions), 0.420 refers to the proportion of residents in the European Union, and 0.104 refers to the proportion of residents in Japan.  
 
 |       | Population (Millions) | Population Proportion | Sales (Millions) | Sales Proportion |
 |:-----:|:---------------------:|:---------------------:|:----------------:|:----------------:|
@@ -108,16 +112,17 @@ $H_a:$ Some $p_i$ are not as specified.
 |   JP  |         126.8         |         0.1038        |       0.078      |      0.1620      |
 | Total |         1221.8        |           1           |       0.486      |         1        |
 
+
 ```{r}
 #Population for NA, EU and JP
 pop = c(0.4767,0.4195,0.1038)
 #Average sales for NA, EU and JP
-Sales = c(263,145,78)
+Sales = c(263000,145000,78000)
 #chi-squared test for significance 
 xchisq.test(Sales, p = pop)
 ```
 
-
+We obtain a test statistic $\chi^2$ of 36287 with the largest contribution to $\chi^2$ coming from EU, and a p-value $2.2 \times 10^{-16}$. Therefore, we reject the null hypothesis and conclude that there is sufficient evidence that supports the claim that the proportion of video game sales by region is not representative of the civilian population in that region (for Japan, North America, and Japan).
 
 
 ### Discussion
