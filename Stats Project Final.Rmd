@@ -1,8 +1,8 @@
 ---
-title: "Math 260 Project Data Description"
+title: "More than Fortnite: An Analysis of Video Game Sales Using the *Dataset Video Game Sales with Ratings* by Rush Kirub"
 subtitle: "Section: 1:20PM"
 author: "Sandy Rosas, Pete Schultz & Tanush Samson"
-date: "11/5/18"
+date: "11/16/18"
 output: 
   html_document: 
     fig_caption: yes
@@ -21,17 +21,17 @@ head(Games2)
 ```
 
 ### Background
-The videogame industry is a multi-billion dollar industry and a significant part of the world economy. We investigated certain trends and patterns within this industry to better understand it. The specific relationships we were interested in are American and Japanese sales, and console and genre. On top of this, we want to estimate the average number of global sales a video game has. From this we are able to better understand how large of an impact video games has on the global economy, learn which economy has a larger market for video games between the Americas and Japan, and to see if specific consoles favor specific genres of games more so than others .
+The videogame industry is a multi-billion dollar industry and a significant part of the world economy. We investigated certain trends and patterns within this industry to better understand it. The specific relationships we were interested in are Critic Score and Global Sales, Video Game Sales (by region) and civilian population, and Console and Global Sales. From this we are able to understand if games with a higher Critic Score sell more units globally, learn if the Japanese, European, and North American video game markets are representative of the amount of people living in each region, and to see how well a video game sells on PS4, Xbox One, and WiiU.
 
 
 ### Methods
 We obtained our data from an online dataset called "Video Game Sales with Ratings" by Rush Kirubi from www.kaggle.com.  
 
-With this dataset, we bootstrap the correlation between global sales (in millions of units) and critic scores. From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation.  
+With this dataset, we create a randomization distribution of the correlation between global sales (in millions of units) and critic scores. From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation.  
 
-Further, we run a two-sample t-test to see if the average Japanese sale of a video game  (in millions of units) differs from the average North American sale of a video game (in millions units).  
+Further, we run a chi-square test to see if the proportion of video game sales in Japan, the European Union and North America match the proportion of civilian population in each region (proportion relative to the total population of all three regions combined).    
 
-Lastly, we use a 90% confidence interval to find the average global sale (in millions of units) of video games on a variety of consoles (PS4, xbox One and WiiU).  
+Lastly, we use a 90% confidence interval to find the average global sale (in millions of units) of a video game on a variety of consoles (PS4, Xbox One and WiiU).  
 
 ### Results
 
@@ -55,7 +55,7 @@ prop(~cor >= 0.24547, data = RandomizationCorrelation)
 ```
 
 **RELATIONSHIP 2**
-
+ 
 An in-depth look into the distribution of global sales for the 3 main platforms: PS4, xbox One and WiiU.
 
 ```{r}
@@ -85,9 +85,14 @@ cdata(~Global_Sales, p = 0.9, data = filter(Games2, Platform == "WiiU"))
 
 |         Console         |       PS4       |    Xbox One    |      Wii U      |
 |:-----------------------:|:---------------:|:--------------:|:---------------:|
-| 90% Confidence Interval | (0.020 , 3.908) | (0.10 , 2.872) | (0.020 , 2.105) |
-|        Min Value        |       0.01      |      0.01      |       0.01      |
-|        Max Value        |      14.63      |      7.39      |       7.09      | 
+| 90% Confidence Interval (millions of units) | (0.020 , 3.908) | (0.10 , 2.872) | (0.020 , 2.105) |
+|        Min Value  (millions of units)      |       0.01      |      0.01      |       0.01      |
+|        Max Value   (millions of units)     |      14.63      |      7.39      |       7.09      |   
+
+We are 90% confident that the true mean global sale of a video game on PS4 is between 0.020 and 3.908 million USD.  
+We are 90% confident that the true mean global sale of a video game on Xbox One is between 0.010 and 2.872 million USD.  
+We are 90% confident that the true mean global sale of a video game on WiiU is between 0.020 and 2.105 million USD.  
+
 
 **RELATIONSHIP 3**
 
