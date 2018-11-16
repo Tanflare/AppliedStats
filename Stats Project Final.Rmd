@@ -24,5 +24,44 @@ We obtained our data from an online dataset called "Video Game Sales with Rating
 
 ### Results
 
+```{r}
+#loading the dataset into R
+Games2 = read.csv(file="C:\\Users\\tanus\\Documents\\VGS.csv")
+head(Games2)
+```
+
+An in-depth look into the distribution of global sales for the 3 main platforms: PS4, xbox One and WiiU.
+
+```{r}
+#Sales for PS4
+gf_boxplot(Global_Sales ~ Platform, data = filter(Games2, Platform == "PS4"))
+gf_boxplot(log(Global_Sales) ~ Platform, data = filter(Games2, Platform == "PS4"))
+favstats(~Global_Sales, data = filter(Games2, Platform == "PS4"))
+cdata(~Global_Sales, p = 0.9, data = filter(Games2, Platform == "PS4"))
+```
+
+```{r}
+#Sales for Xbox One
+gf_boxplot(Global_Sales ~ Platform, data = filter(Games2, Platform == "XOne"))
+gf_boxplot(log(Global_Sales) ~ Platform, data = filter(Games2, Platform == "XOne"))
+favstats(~Global_Sales, data = filter(Games2, Platform == "XOne"))
+cdata(~Global_Sales, p = 0.9, data = filter(Games2, Platform == "XOne"))
+```
+
+```{r}
+#Sales for WiiU
+gf_boxplot(Global_Sales ~ Platform, data = filter(Games2, Platform == "WiiU"))
+gf_boxplot(log(Global_Sales) ~ Platform, data = filter(Games2, Platform == "WiiU"))
+favstats(~Global_Sales, data = filter(Games2, Platform == "WiiU"))
+cdata(~Global_Sales, p = 0.9, data = filter(Games2, Platform == "WiiU"))
+```
+
+
+|         Console         |       PS4       |    Xbox One    |      Wii U      |
+|:-----------------------:|:---------------:|:--------------:|:---------------:|
+| 90% Confidence Interval | (0.020 , 3.908) | (0.10 , 2.872) | (0.020 , 2.105) |
+|        Min Value        |       0.01      |      0.01      |       0.01      |
+|        Max Value        |      14.63      |      7.39      |       7.09      | 
+
 
 ### Discussion
