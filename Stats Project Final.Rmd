@@ -15,7 +15,9 @@ library(mosaic)
 library(Lock5withR)
 library(readr)
 library(dplyr)
-Games2 = read.csv(file = "VGS.csv")
+#Games2 = read.csv(file = "VGS.csv")
+Games2 = read.csv(file="C:\\Users\\tanus\\Documents\\VGS.csv")
+head(Games2)
 ```
 
 ### Background
@@ -32,12 +34,15 @@ Further, we run a two-sample t-test to see if the average Japanese sale of a vid
 Lastly, we use a 90% confidence interval to find the average global sale (in millions of units) of video games on a variety of consoles (PS4, xbox One and WiiU).  
 
 ### Results
+
 **RELATIONSHIP 1**  
+
 $H_0: \rho = 0$  
 $H_a: \rho > 0$  
-where $\rho$ is the true population coefficient between Global Sales (in millions of units) and Critic Score for all video games.
+where $\rho$ is the true population correlation between Global Sales (in millions of units) and Critic Score for all video games.
 
 We obtain sample correlation of r = 0.245 with a p-value of essentially 0. This means that assuming the null hypothesis is true (that there is no correlation between global sales and critic score), there is essentially a 0% chance that we would obtain a sample correlation statistic as extreme as 0.245. Therefore, at the $\alpha$ = 0.01 level of significance, we reject the null hypothesis and conclude that there is sufficient evidence that supports the claim that there is a positive correlation between Global Sales and Critic Scores for all video games.  
+
 ```{r}
 Games2.cor = filter(Games2,Critic_Score != "NA")
 cor(Global_Sales~Critic_Score, data = Games2.cor)
@@ -48,14 +53,8 @@ gf_histogram(~cor, data = RandomizationCorrelation)
 ```{r}
 prop(~cor >= 0.24547, data = RandomizationCorrelation)
 ```
+
 **RELATIONSHIP 2**
-
-
-```{r}
-#loading the dataset into R
-Games2 = read.csv(file="C:\\Users\\tanus\\Documents\\VGS.csv")
-head(Games2)
-```
 
 An in-depth look into the distribution of global sales for the 3 main platforms: PS4, xbox One and WiiU.
 
@@ -89,6 +88,31 @@ cdata(~Global_Sales, p = 0.9, data = filter(Games2, Platform == "WiiU"))
 | 90% Confidence Interval | (0.020 , 3.908) | (0.10 , 2.872) | (0.020 , 2.105) |
 |        Min Value        |       0.01      |      0.01      |       0.01      |
 |        Max Value        |      14.63      |      7.39      |       7.09      | 
+
+**RELATIONSHIP 3**
+
+We expect the proportion of average video games sales in North America, Europeean Union countries and Japan to match the proportion of the respective sales in those regions.
+
+$H_0: p_{NA} = 0.477, p_{EU} = 0.420, p_{JP} = 0.104$ 
+$H_a:$ Some $p_i$ are not as specified.
+
+|       | Population (Millions) | Population Proportion | Sales (Millions) | Sales Proportion |
+|:-----:|:---------------------:|:---------------------:|:----------------:|:----------------:|
+|   NA  |         582.4         |         0.4767        |       0.263      |      0.5422      |
+|   EU  |         512.6         |         0.4195        |       0.145      |      0.2994      |
+|   JP  |         126.8         |         0.1038        |       0.078      |      0.1620      |
+| Total |         1221.8        |           1           |       0.486      |         1        |
+
+```{r}
+#Population for NA, EU and JP
+pop = c(0.4767,0.4195,0.1038)
+#Average sales for NA, EU and JP
+Sales = c(263,145,78)
+#chi-squared test for significance 
+xchisq.test(Sales, p = pop)
+```
+
+
 
 
 ### Discussion
