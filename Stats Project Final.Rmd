@@ -1,5 +1,5 @@
 ---
-title: ": An Analysis of Video Game Sales Using the *Dataset Video Game Sales with Ratings* by Rush Kirub"
+title: "More than Fortnite: An Analysis of Video Game Sales Using the *Dataset Video Game Sales with Ratings* by Rush Kirub"
 subtitle: "Section: 1:20PM"
 author: "Sandy Rosas, Pete Schultz & Tanush Samson"
 date: "11/16/18"
