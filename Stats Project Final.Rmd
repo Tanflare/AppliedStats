@@ -24,10 +24,15 @@ The videogame industry is a multi-billion dollar industry and a significant part
 
 ### Methods
 We obtained our data from an online dataset called "Video Game Sales with Ratings" by Rush Kirubi from www.kaggle.com.  
+
 With this dataset, we bootstrap the correlation between global sales (in millions of units) and critic scores. From this we check the probabilty of obtaining a sample correlation statistic as extreme as ours assuming there is no correlation.  
-Further, we run a two-sample t-test to see if Japanese video game sales (in millions of units) differ from American video game sales (in millions units).   Lastly, we use a 90% confidence interval to find the average global sale (in millions of units) of video games on a variety of consoles (PS4, xbox One and WiiU).
+
+Further, we run a two-sample t-test to see if the average Japanese sale of a video game  (in millions of units) differs from the average North American sale of a video game (in millions units).  
+
+Lastly, we use a 90% confidence interval to find the average global sale (in millions of units) of video games on a variety of consoles (PS4, xbox One and WiiU).  
 
 ### Results
+**RELATIONSHIP 1**  
 $H_0: \rho = 0$  
 $H_a: \rho > 0$  
 where $\rho$ is the true population coefficient between Global Sales (in millions of units) and Critic Score for all video games.
@@ -43,6 +48,8 @@ gf_histogram(~cor, data = RandomizationCorrelation)
 ```{r}
 prop(~cor >= 0.24547, data = RandomizationCorrelation)
 ```
+**RELATIONSHIP 2**
+
 
 
 ### Discussion
