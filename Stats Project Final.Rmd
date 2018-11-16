@@ -107,7 +107,7 @@ $H_a:$ Some $p_i$ are not as specified.
 #Population for NA, EU and JP
 pop = c(0.4767,0.4195,0.1038)
 #Average sales for NA, EU and JP
-Sales = c(263,145,78)
+Sales = c(263000,145000,78000)
 #chi-squared test for significance 
 xchisq.test(Sales, p = pop)
 ```
